@@ -42,8 +42,7 @@ modelUser.pre('save', function(next) {
 var User = mongoose.model('User', models);
 
 //Exports User
-exports.models = models;
-exports.User = User;
+module.exports = User;
 
 
 
