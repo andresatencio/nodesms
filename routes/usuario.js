@@ -1,7 +1,9 @@
 /**
  * Dependencias
  */
-var User = require('../models/user'),
+var db = require('../models/models'),
+	User = db.User,
+	models = db.models,
 	pass = require('pwd');
 
 /**
