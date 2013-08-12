@@ -10,7 +10,7 @@ var User = require('../models/models'),
  * Ruta para generar nuevo usuario.
  * app.post('/register', )
  */
-exports.newUser = function (req, res){
+exports.register = function (req, res){
 
 	/**
 	 * Funcion que verifica que no exista 

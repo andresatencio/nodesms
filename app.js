@@ -33,7 +33,7 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/que', routes.que);
-app.post('/register', routesUser.newUser);
+app.post('/register', routesUser.register);
 app.post('/login', routesUser.login);
 
 
