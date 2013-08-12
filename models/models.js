@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
 var schemaUser = {
 	email: {type: String, required: true, unique: true, trim: true, lowercase: true },
 	pass: {type: String, required: true},
-	salt: String
+	sms: [{ destino: Number, origen: Number , msj: String}]
 };
 
 var models = Schema(schemaUser);
