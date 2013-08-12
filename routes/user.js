@@ -39,10 +39,10 @@ exports.register = function (req, res){
 			      return;
 			    }
 			    console.log("Se registro USUARIO OK: \n".green + user);
-			    user.sms.pull({dest: 3364212283, origen:3364212283, msj: "Que onda?"});
-			    res.redirect('/');
+			    
+			    //res.redirect('/');
 			})
-			
+			user.sms.push({destino: 3364212283, origen:3364212283, msj: "Que onda?"});
 	}
 
 	User.findOne({ email: req.body.email}, userDuplicate);
