@@ -8,7 +8,7 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , connection = require('./db/connection')
-  , routesUsuario = require('./routes/usuario')
+  , routesUser = require('./routes/user')
   , colors = require('colors');
 
 var app = express();
@@ -19,6 +19,8 @@ app.configure(function(){
   app.set('view engine', 'ejs');
   app.use(express.favicon());
   app.use(express.logger('dev'));
+  app.use(express.cookieParser());
+  app.use(express.session({ secret: "nodesms shhh" }));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -31,7 +33,8 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/que', routes.que);
-app.post('/register', routesUsuario.nuevoUsuario);
+app.post('/register', routesUser.newUser);
+app.post('/login', routesUser.login);
 
 
 http.createServer(app).listen(app.get('port'), function(){
