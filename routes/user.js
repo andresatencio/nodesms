@@ -12,7 +12,7 @@ var User = require('../models/models'),
  */
 exports.newUser = function (req, res){
 
-	/*
+	/**
 	 * Funcion que verifica que no exista 
 	 * un usuario duplicado
 	 */
@@ -47,33 +47,41 @@ exports.newUser = function (req, res){
 
 };
 
+/**
+ * Manejo del login
+ */
 exports.login = function (req, res){
 
-	console.log(req.param("email"));
-	console.log(req.param("pass"));
-	/*
+	//En el caso de que la session esta vigente, lo redirecciona
 	if (req.session.user != undefined) {
 		res.redirect("/admin");
 	}
-	*/
-	User.findOne({ email: req.body.email },
 
-		function (err, doc){
+	/**
+	 * Funcion que valida login
+	 */
+	function userValidate (err, doc) {
 
-			if(err) {
-				res.send("Error", 500);
-			}
+		if(err) {
+			res.send("Error", 500);
+			return;
+		}
+		// Si doc es nulo, es que no esta registrado ese usuario
+		if ( doc == null ) {
+			console.log("No esta registrado : ".yellow + req.body.email);
+			res.redirect("/");
+			return;
 
-			if ( doc == null ){
-				console.log("No esta registrado : ".yellow + req.body.email.toString().green);
-				res.redirect("/");
+		} else if ( doc.pass == req.body.pass ) {
+			req.session.user = doc;
+			res.send("Antorizado", 200);
+			return;
+			
+		} else {
+			res.send("No autorizado", 401);
+		}
+	};
 
-			} else if ( doc.pass == req.body.pass ) {
-				req.session.user = doc;
-				res.send("Antorizado", 200);
-
-			} else {
-				res.send("No autorizado", 401);
-			}
-		})
+	User.findOne({ email: req.body.email }, userValidate);
 };
+
