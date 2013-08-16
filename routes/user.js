@@ -3,7 +3,34 @@
  */
 var User = require('../models/models'),
 	pass = require('pwd'),
-	colors = require('colors');
+	colors = require('colors'),
+	tools = {};
+
+/**
+ * Validaciones, y otras yerbas
+ */
+tools = ( function (){
+
+	var a1, a2;
+
+	function validate (email, pass, cbAccion){
+
+		if( email.length <= 0 ||
+			email.length >= 15 ||
+			pass.length <= 0 ||
+			pass.length >= 10 ) {
+			return cbAccion;
+		}
+	}
+
+	return{
+		
+		validate: function (email, pass, cbAccion){
+					return validate(email, pass, cbAccion);
+				}
+
+	}
+})();
 
 
 /**
@@ -12,37 +39,37 @@ var User = require('../models/models'),
  */
 exports.register = function (req, res){
 
-	/**
-	 * Funcion que verifica que no exista 
-	 * un usuario duplicado
-	 */
+	var email = req.body.email,
+		pass = req.body.pass;
+
+	tools.validate(email, pass,	res.send(404, "Error en registro"));
+
+	
+
+	//verifica nombre duplicado
 	function userDuplicate (err, doc){
+	 	
 	 	if (err) {
-				res.send("Error", 500);
-			}
-			if (doc != null) {
-				res.send("Error", 404);
-			}
-			//Se arma objeto con la peticion
-			var u = {
-				email: req.body.email,
-				pass: req.body.pass
-			}
+			res.send(500, "Error");
+		}
+		if (doc != null) {
+			res.send(404, "Error");
+		}
 
-			//Se crea usuario
-			var user = new User(u);
+		//Se crea usuario
+		var user = new User({email: email, pass: pass });
 
-			//Se guarda
-			user.save(function(err) {
-			    if (err) {
-			      res.send("Error", 500);
-			      return;
-			    }
-			    console.log("Se registro USUARIO OK: \n".green + user);
-			    
-			    //res.redirect('/');
-			})
-			user.sms.push({destino: 3364212283, origen:3364212283, msj: "Que onda?"});
+		//Se guarda
+		user.save(function(err) {
+		    if (err) {
+		      res.send("Error", 500);
+		      return;
+		    }
+		    console.log("Se registro USUARIO OK: \n".green + user);
+		    res.redirect('/');
+		})
+		//A sacar
+		//user.sms.push({destino: 3364212283, origen:3364212283, msj: "Que onda?"});
 	}
 
 	User.findOne({ email: req.body.email}, userDuplicate);
