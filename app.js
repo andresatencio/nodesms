@@ -40,6 +40,5 @@ app.get('/logout', routesUser.logout);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Guarda que arranca NODESMS!!!".rainbow);
-
   console.log("Express! Puerto: ".green + app.get('port').toString().yellow);
 });
