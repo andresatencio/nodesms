@@ -5,12 +5,18 @@ var mongoose = require('mongoose'),
 	
 //Scheme User
 var schemaUser = {
-	email: {type: String, required: true, unique: true, trim: true, lowercase: true },
-	pass: {type: String, required: true},
+	provider: String,
+  	uid: String,
+  	nombre: String,
+  	image: String,
+  	creado: {type: Date, default: Date.now},
+	email: {type: String, unique: true, trim: true, lowercase: true },
+	pass: {type: String},
 	sms: [{ destino: Number, origen: Number , msj: String}]
 };
 
 var models = Schema(schemaUser);
+
 
 /**
  * Middleware encrypts the user's password
@@ -39,7 +45,7 @@ modelUser.pre('save', function(next) {
 });
 */
 
-var User = mongoose.model('User', models);
+var User = mongoose.model('Usuario', models);
 
 //Exports User
 module.exports = User;

@@ -4,7 +4,12 @@
 var User = require('../models/models'),
 	pass = require('pwd'),
 	colors = require('colors'),
-	tools = {};
+	tools = {},
+	
+
+
+
+
 
 /**
  * Validaciones, y otras yerbas
@@ -124,8 +129,9 @@ exports.login = function (req, res){
 };
 
 exports.logout = function (req, res){
-	if (req.session.user) {
+	if (req.session.user || req.user) {
 		req.session.destroy();
+		req.logout();
 		res.redirect("/");
 	} else {
 		res.send("No autorizado", 401);
