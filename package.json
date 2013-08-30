@@ -11,6 +11,8 @@
     "socket.io":"*",
     "mongoose": "3.6.11",
     "pwd": "*",
-    "colors": "*"
+    "colors": "*",
+    "passport-twitter": "*",
+    "passport": "*"
   }
 }

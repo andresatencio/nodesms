@@ -4,7 +4,12 @@
 var User = require('../models/models'),
 	pass = require('pwd'),
 	colors = require('colors'),
-	tools = {};
+	tools = {},
+	
+
+
+
+
 
 /**
  * Validaciones, y otras yerbas
@@ -37,12 +42,16 @@ tools = ( function (){
  * Ruta para generar nuevo usuario.
  * app.post('/register', )
  */
-exports.register = function (req, res){
+exports.register = function (req, res, next){
 
 	var email = req.body.email,
 		pass = req.body.pass;
 
-	tools.validate(email, pass,	res.send(404, "Error en registro"));
+	//Valida 
+	tools.validate(email, pass, function (){
+		res.send(404, "Error en registro");
+		next();
+	});
 
 	
 
@@ -57,22 +66,22 @@ exports.register = function (req, res){
 		}
 
 		//Se crea usuario
-		var user = new User({email: email, pass: pass });
+		var user = new User({email: email, pass: pass, sms:[] });
 
 		//Se guarda
 		user.save(function(err) {
 		    if (err) {
-		      res.send("Error", 500);
-		      return;
-		    }
+		      res.send(500, "Error");
+		    } else {
 		    console.log("Se registro USUARIO OK: \n".green + user);
 		    res.redirect('/');
+		    }
 		})
 		//A sacar
 		//user.sms.push({destino: 3364212283, origen:3364212283, msj: "Que onda?"});
 	}
 
-	User.findOne({ email: req.body.email}, userDuplicate);
+	User.findOne({ email: email}, userDuplicate);
 
 };
 
@@ -82,10 +91,11 @@ exports.register = function (req, res){
 exports.login = function (req, res){
 
 	//En el caso de que la session esta vigente, lo redirecciona
+	/*
 	if (req.session.user != undefined) {
 		res.redirect("/admin");
 	}
-
+	*/
 	/**
 	 * Funcion que valida login
 	 */
@@ -103,7 +113,11 @@ exports.login = function (req, res){
 
 		} else if ( doc.pass == req.body.pass ) {
 			req.session.user = doc;
-			res.send("Antorizado", 200);
+			//No cachear pagina privada
+			res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+			res.header("Pragma", "no-cache");
+			res.header("Expires", 0);
+			res.send("Autorizado <a href='/logout'>Logout</a>", 200);
 			return;
 			
 		} else {
@@ -114,3 +128,12 @@ exports.login = function (req, res){
 	User.findOne({ email: req.body.email }, userValidate);
 };
 
+exports.logout = function (req, res){
+	if (req.session.user || req.user) {
+		req.session.destroy();
+		req.logout();
+		res.redirect("/");
+	} else {
+		res.send("No autorizado", 401);
+	}
+};
