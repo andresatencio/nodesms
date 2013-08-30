@@ -1,171 +1,22 @@
-<!DOCTYPE html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-  <title>NodeSMS</title>
-  <link rel="shortcut icon" href="img/Mail@2x.ico">
-  <link rel="icon" href="img/Mail@2x.ico">
-  <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap-responsive.min.css">
-  <link rel="stylesheet" type="text/css" media="all" href="css/global.css">
-  <link rel="stylesheet" type="text/css" media="all" href="css/main.css">
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script type="text/javascript" language="javascript" charset="utf-8" src="js/bootstrap.min.js"></script>
-</head>
-
-<body>
-    <nav id="navigation">
-      <div class="container">
-        <ul class="navlinks">
-          <li><a href="/" class="brand">NodeSMS</a></li>
-          <li><a href="/que">Que es?</a></li>
-        </ul>
-      </div>
-    </nav>
-    
-    <header id="heading">
-      <div class="container text-center">
-        <h1>NodeSMS</h1>
-        <h4>Gateway sms's gratis</h4>
-        <p>
-          <a class="btn btn-large btn-primary" data-toggle="modal" href="#register">Crear cuenta</a>
-          <a class="btn btn-large btn-success" data-toggle="modal" href="#login">Login</a>
-        </p>
-      </div>
-    </header>
-    
-    <div id="main-content">
-      <div class="container">
-        <div class="row">
-          <div class="span12">
-            <br>
-          </div>
-        </div>
-        <div class="row">
-          <div class="span4 center">
-                    <img src="img/Pensils@2x.png" alt="Sincroniza" class="resize">
-                    <h2>Sincronizá</h2>
-                    <p>Todos tus contactos.</p>
-                    <p><a class="btn btn-primary" href="/que#sincroniza">Detalles</a></p>
-                </div>
-                <div class="span4 center">
-                    <img src="img/Mail@2x.png" alt="Respalda" class="resize">
-                    <h2>Guardá</h2>
-                    <p>Respalda tus sms's.</p>
-                    <p><a class="btn btn-primary" href="/que#guarda">Detalles</a></p>
-               </div>
-               <div class="span4 center">
-                    <img src="img/Infinity-Loop@2x.png" alt="Api" class="resize">
-                    <h2>Api</h2>
-                    <p>Desarrolla aplicaciones.</p>
-                    <p><a class="btn btn-primary" href="/que#api">Detalles</a></p>
-               </div>
-        </div>
-        <!-- @end .row -->
-        </div>
-      </div>
-      <!-- /container -->
-      <hr>
-      <footer class="center">
-        <p>
-            <a href="http://andresatencio.com.ar">&copy; Andres Atencio 2013</a>
-        </p>
-      </footer>
-      
-
-      <!-- /modal register --> 
-        <div id="register" class="modal hide fade">
-            <div class="modal-header">
-                    <button class="close" data-dismiss="modal">×</button>
-                    <h3>NodeSMS</h3>
-            </div>
-        <div class="modal-body">
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="span6">
-                    <div class="logowrapper">
-                        <img class="logoicon" src="img/signup.png" alt="NodeSMS"/>
-                    </div>
-                    </div>
-                    <div class="span6">
-                        <form class="form-horizontal" method="POST" action="/register">
-                            <p class="help-block">Email</p>
-                            <div class="input-prepend">
-                                <span class="add-on">@</span><input class="prependedInput" size="16" type="email" name="email">
-                            </div>
-                            <p class="help-block">Password</p>
-                            <div class="input-prepend">
-                                <span class="add-on">*</span><input class="prependedInput" size="16" type="password" name="pass">
-                            </div>
-                            <p class="help-block">Repetir password</p>
-                            <div class="input-prepend">
-                                <span class="add-on">*</span><input class="prependedInput" size="16" type="password">
-                            </div>
-                            <hr>
-                            <div class="help-block">
-                                <button type="submit" class="btn btn-large btn-primary">Registrarme</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <div class="modal-footer">
-                <p><i>mas info: nodesms@gmail.com</i></p>
-            </div>
-        </div>
-
-        <!-- /modal login --> 
-        <div id="login" class="modal hide fade">
-            <div class="modal-header">
-                    <button class="close" data-dismiss="modal">×</button>
-                    <h3>NodeSMS</h3>
-            </div>
-        <div class="modal-body">
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="span6">
-                    <div class="logowrapper">
-                        <img class="logoicon" src="img/enter.png" alt="NodeSMS"/>
-                    </div>
-                    </div>
-                    <div class="span6">
-                        <form class="form-horizontal" method="POST" action="/login">
-                            <p class="help-block">Email</p>
-                            <div class="input-prepend">
-                                <span class="add-on">@</span><input class="prependedInput" size="16" type="email" name="email">
-                            </div>
-                            <p class="help-block">Password</p>
-                            <div class="input-prepend">
-                                <span class="add-on">*</span><input class="prependedInput" size="16" type="password" name="pass">
-                            </div>
-                            <hr>
-                            <div class="help-block">
-                                <button type="submit" class="btn btn-large btn-success">Login</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <div class="modal-footer">
-                <p><i>mas info: nodesms@gmail.com</i></p>
-            </div>
-        </div>
-
-
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-
-        <script src="js/vendor/bootstrap.min.js"></script>
-
-        <script src="js/main.js"></script>
-
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-    </body>
+<html>
+	<head>
+		<link rel="stylesheet" href="/css/style.css">
+	</head>
+	<body>
+		<div>
+			<h1>Nuevo usuario</h1>
+			<hr>
+			<form action="/register" method="POST">
+				<label for="email">Email:</label>
+				<input type="text" name="email">
+				<label for="pass">Pass:</label>
+				<input type="text" name="pass">
+				<input type="submit" value="Registrar">
+			</form>
+		</div>
+		<div>
+			<h1>Usuario por TW</h1>
+			<a href="/auth/twitter">Sign in with Twitter</a>
+		</div>
+	</body>
 </html>
-

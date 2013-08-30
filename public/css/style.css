@@ -1,0 +1,9 @@
+body{
+	background-color: #232323;
+	color: #FFFFFF;
+	font-family: Arial;
+}
+div{
+	border: solid 3px #FFF;
+	padding: 10px 10px 10px 10px;
+}
